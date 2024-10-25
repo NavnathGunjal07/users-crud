@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-crud
+spec:
+  replicas: 2  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: users-crud
+  template:
+    metadata:
+      labels:
+        app: users-crud
+    spec:
+      containers:
+      - name: my-node-container
+        image: node:14 
+        command: ["node", "-e", "http.createServer((req, res) => res.end('Hello from Node.js')).listen(3000)"]
+        ports:
+        - containerPort: 3000

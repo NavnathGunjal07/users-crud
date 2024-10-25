@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb+srv://navnathgunjal:greenindai@cluster0.hnfq5.mongodb.net/onelab?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
